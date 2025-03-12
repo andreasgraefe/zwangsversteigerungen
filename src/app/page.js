@@ -18,10 +18,6 @@ export default function HomePage() {
   const superclusterRef = useRef(new Supercluster({ radius: 50, maxZoom: 16 }));
 
   useEffect(() => {
-    console.log("Mapbox Token from env:", process.env.NEXT_PUBLIC_MAPBOX_TOKEN);
-  }, []); // ✅ Runs once on mount
-
-  useEffect(() => {
     fetch('https://opensheet.vercel.app/1HueWQVuM5LEzGmbDJj5bipF1Jqe-7bY8gLhQcz1F9Qg/immobilien')
       .then((response) => response.json())
       .then((data) => {
