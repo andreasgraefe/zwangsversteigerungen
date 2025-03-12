@@ -14,7 +14,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-map-gl": "^7.1.9",
-    "supercluster": "^8.0.1"
+    "supercluster": "^8.0.1",
+    "vercel": "^41.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -18,6 +18,10 @@ export default function HomePage() {
   const superclusterRef = useRef(new Supercluster({ radius: 50, maxZoom: 16 }));
 
   useEffect(() => {
+    console.log("Mapbox Token from env:", process.env.NEXT_PUBLIC_MAPBOX_TOKEN);
+  }, []); // ✅ Runs once on mount
+
+  useEffect(() => {
     fetch('https://opensheet.vercel.app/1HueWQVuM5LEzGmbDJj5bipF1Jqe-7bY8gLhQcz1F9Qg/immobilien')
       .then((response) => response.json())
       .then((data) => {
@@ -26,7 +30,7 @@ export default function HomePage() {
             type: "Feature",
             properties: {
               cluster: false,
-              id: item.PK_numerical, // ✅ Use PK_numerical instead of index
+              id: item.PK_numerical,
               title: item.Beschreibung,
               address: item.Adresse,
               description: item.Beschreibung,
@@ -40,14 +44,13 @@ export default function HomePage() {
             !isNaN(listing.geometry.coordinates[0]) &&
             !isNaN(listing.geometry.coordinates[1])
           );
-        
+
         console.log("Fetched Listings:", formattedListings);
         superclusterRef.current.load(formattedListings);
         setListings(formattedListings);
       })
       .catch((error) => console.error('Error fetching listings:', error));
   }, []);
-  
 
   useEffect(() => {
     if (listings.length > 0) {
@@ -104,7 +107,7 @@ export default function HomePage() {
                 </Marker>
               );
             }
-            
+
             return (
               <Marker
                 key={cluster.properties.id}
@@ -166,4 +169,3 @@ function Newsfeed() {
     </div>
   );
 }
-
